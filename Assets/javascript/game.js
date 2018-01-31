@@ -46,7 +46,6 @@ document.onkeyup = function (event) {
             document.getElementById("losses").innerHTML = losses;
             document.getElementById("attempts").innerHTML = "10";
             document.getElementById("computer-letter").innerHTML = "<p> The letter was: " + computerGuess + "</p>";
-            console.log(computerGuess);
         }
     }
 
