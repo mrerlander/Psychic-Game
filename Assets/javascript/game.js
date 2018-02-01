@@ -3,6 +3,7 @@ var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l
 var attempts = 10;
 var wins = 0;
 var losses = 0;
+var userGuesses = [];
 
 //variable to choose random number from computer array
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
@@ -15,10 +16,9 @@ document.onkeyup = function (event) {
     var nonLetter = document.getElementById("non-letters");
 
     //if statement for user input (letters only)
-    if (computerChoices.includes(userGuess)) {
+    if (computerChoices.includes(userGuess) && (userGuesses.includes(userGuess) === false)) {
 
         nonLetter.innerHTML = "";
-
         document.getElementById("guesses").innerHTML += userGuess;
 
         //if statement for correct guess
@@ -29,13 +29,15 @@ document.onkeyup = function (event) {
             document.getElementById("computer-letter").innerHTML = "<p> Yes! The letter was: " + computerGuess + "</p>";
             document.getElementById("wins").innerHTML = wins;
             document.getElementById("attempts").innerHTML = "10";
+            userGuesses = [];
             computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
         }
-
+      
         //else if incorrect guess (show letters attempted attempts--)
         else if (attempts > 1) {
             attempts--;
             document.getElementById("attempts").innerHTML = attempts;
+            userGuesses.push(userGuess);
         }
 
         //restart
@@ -46,8 +48,14 @@ document.onkeyup = function (event) {
             document.getElementById("losses").innerHTML = losses;
             document.getElementById("attempts").innerHTML = "10";
             document.getElementById("computer-letter").innerHTML = "<p> The letter was: " + computerGuess + "</p>";
+            userGuesses = [];
             computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
         }
+    }
+
+    //letter previously guessed
+    else if (userGuesses.includes(userGuess)) {
+        nonLetter.innerHTML = "You already guessed that letter";
     }
 
     //else press a valid key
