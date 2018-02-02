@@ -32,7 +32,7 @@ document.onkeyup = function (event) {
             userGuesses = [];
             computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
         }
-      
+
         //else if incorrect guess (show letters attempted attempts--)
         else if (attempts > 1) {
             attempts--;
